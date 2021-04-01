@@ -5,6 +5,7 @@ var cookieParser=require('cookie-parser');
 var authRoute=require('./routes/auth.route');
 var productRoute=require('./routes/product.route')
 var cartRoute=require('./routes/cart.route');
+var transferRoute=require('./routes/transfer.route');
 
 var authMiddleware=require('./middlewares/auth.middleware');
 var sessionMiddleware = require('./middlewares/session.middleware');
@@ -33,11 +34,13 @@ app.use(express.static('public'));
 // })
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use('/banh',authMiddleware.requireAuth,userRoute);
+app.use('/transfer',authMiddleware.requireAuth, transferRoute);
 app.use(sessionMiddleware);
 
 app.use('/auth',authRoute);
 app.use('/products',productRoute);
 app.use('/cart',cartRoute);
+
 app.listen(port, function () {
     console.log('Server listening on port' + port);
 });
