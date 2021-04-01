@@ -1,7 +1,13 @@
+require('dotenv').config();
+    console.log(process.env.SESSION_SECRET);
 var express = require('express');
 var cookieParser=require('cookie-parser');
 var authRoute=require('./routes/auth.route');
+var productRoute=require('./routes/product.route')
+var cartRoute=require('./routes/cart.route');
+
 var authMiddleware=require('./middlewares/auth.middleware');
+var sessionMiddleware = require('./middlewares/session.middleware');
 var port = 3000;
 var userRoute = require('./routes/user.route');
 // var shortid = require('shortid');
@@ -25,10 +31,13 @@ app.use(express.static('public'));
 //     test.push({ id: temp, name: req.body.xxx });
 //     res.redirect('/banh');
 // })
-app.use(cookieParser('ffghhjhjhkjk32325'));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use('/banh',authMiddleware.requireAuth,userRoute);
+app.use(sessionMiddleware);
 
 app.use('/auth',authRoute);
+app.use('/products',productRoute);
+app.use('/cart',cartRoute);
 app.listen(port, function () {
     console.log('Server listening on port' + port);
 });

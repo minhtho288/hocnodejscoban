@@ -9,11 +9,14 @@ block content
         button(class="btn btn-primary", style="margin-left:10px") Search
   table.table
     tr
+      th Avatar
       th Name
       th Phone
       th Actions
     each keo in test
       tr
+        td
+          img(src= keo.avatar, width="60")
         td= keo.name
         td= keo.phone
         td

@@ -6,6 +6,9 @@ module.exports.postCreate=function(req,res,next){
     if(!req.body.phone){
         errors.push('Phone is required');
     }
+    // if(!req.body.upload){
+    //     errors.push('upload is required');
+    // }
     if(errors.length){
         res.render('banh/create',{
             errors:errors,

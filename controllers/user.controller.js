@@ -28,8 +28,9 @@ module.exports.get = function(req, res){
         user:user1
     });
 }
-module.exports.postCreate =  function (req, res) {
-    req.body.id=shortid.generate();
+module.exports.postCreate = function (req, res) {
+    req.body.id = shortid.generate();
+    req.body.avatar = req.file.path.slice(7);
     // req.body.id=id++;
     // console.log(res.locals);
     db.get('test').push(req.body).write();

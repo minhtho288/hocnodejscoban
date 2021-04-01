@@ -1,5 +1,5 @@
 var md5 = require('md5');
-var db = require('../db');
+var db= require('../db');
 
 module.exports.login = function (req, res) {
     
